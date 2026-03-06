@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="side">
+    <img src="/static/bilder/bakgrunnloggin.jpg" class="hoved-bakgrunn">
 
-<h1>Velkommen {{ username }}</h1>
+    <div class="kort welcome-card">
+        <div class="hoyre welcome-content">
+            <h1>Velkommen {{ username }}</h1>
+            <p>Du er nå logget inn på IT Asset Management.</p>
 
-
-
+            <form action="/logout" method="POST">
+                <button type="submit" class="knapp gronn logout-btn">Logg ut</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

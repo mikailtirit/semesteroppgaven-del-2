@@ -88,3 +88,9 @@ def welcome():
         return redirect(url_for('home'))
     return render_template('welcome.html', username=session['username'])
 
+# Logg ut bruker
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
+
