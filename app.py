@@ -4,9 +4,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Opprett Flask-app
 app = Flask(__name__)
-app.secret_key = "k39fj29FJ#9fj29fJ$"  # Holder innloggingen trygg
+app.secret_key = "hemmelig123"  # Viktig for å bruke session
 
-# Funksjon: Koble til MySQL
+# Funksjon: koble til MySQL database
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
@@ -15,12 +15,12 @@ def get_db_connection():
         database="semesteroppgave_db"
     )
 
-# FORSIDE: viser register/login-side
+# Hovedside: viser login/registrer side
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# REGISTRER NY BRUKER
+# Registrer ny bruker
 @app.route('/register', methods=['POST'])
 def register():
     brukernavn = request.form.get('username')
@@ -31,10 +31,11 @@ def register():
         cursor = conn.cursor(dictionary=True)
 
         # Sjekk om brukeren allerede finnes
-        cursor.execute("SELECT * FROM users WHERE username = %s", (brukernavn,))
+        cursor.execute("SELECT * FROM users WHERE username=%s", (brukernavn,))
         eksisterende = cursor.fetchone()
 
         if not eksisterende:
+            # Lag ny bruker med kryptert passord
             hashed_password = generate_password_hash(passord)
             cursor.execute(
                 "INSERT INTO users (username, password) VALUES (%s, %s)",
@@ -42,12 +43,21 @@ def register():
             )
             conn.commit()
 
+            # Hent den nye brukerens ID
+            cursor.execute("SELECT * FROM users WHERE username=%s", (brukernavn,))
+            ny_bruker = cursor.fetchone()
+
+            # Lagre info i session
+            session['user_id'] = ny_bruker['id']
+            session['username'] = ny_bruker['username']
+
         cursor.close()
         conn.close()
 
-    return redirect(url_for('home'))
+    # Send til welcome-side uansett
+    return redirect(url_for('welcome'))
 
-# LOGG INN
+# Logg inn eksisterende bruker
 @app.route('/login', methods=['POST'])
 def login():
     brukernavn = request.form.get('username')
@@ -56,27 +66,25 @@ def login():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM users WHERE username = %s", (brukernavn,))
+    cursor.execute("SELECT * FROM users WHERE username=%s", (brukernavn,))
     bruker = cursor.fetchone()
 
     cursor.close()
     conn.close()
 
-    # Sjekk passord
     if bruker and check_password_hash(bruker['password'], passord):
+        # Lagre info i session
         session['user_id'] = bruker['id']
         session['username'] = bruker['username']
         return redirect(url_for('welcome'))
-        
 
+    # Hvis login feil, bare bli på samme side
     return redirect(url_for('home'))
 
-# WELCOME-SIDE
+# Welcome-side, kun tilgjengelig hvis logget inn
 @app.route('/welcome')
 def welcome():
     if 'user_id' not in session:
         return redirect(url_for('home'))
     return render_template('welcome.html', username=session['username'])
 
-if __name__ == '__main__':
-    app.run(debug=True)
