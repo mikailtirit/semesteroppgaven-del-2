@@ -12,7 +12,8 @@ def get_db_connection():
         host="localhost",
         user="mikail2008",
         password="123Akademiet!",
-        database="semesteroppgave_db"
+        database="semesteroppgave_db",
+        charset='utf8mb4'  # viktig for å støtte hashede passord korrekt
     )
 
 # Hovedside: viser login/registrer side
@@ -73,12 +74,11 @@ def login():
     conn.close()
 
     if bruker and check_password_hash(bruker['password'], passord):
-        # Lagre info i session
         session['user_id'] = bruker['id']
         session['username'] = bruker['username']
         return redirect(url_for('welcome'))
 
-    # Hvis login feil, bare bli på samme side
+    # Hvis login feil, bli på samme side
     return redirect(url_for('home'))
 
 # Welcome-side, kun tilgjengelig hvis logget inn

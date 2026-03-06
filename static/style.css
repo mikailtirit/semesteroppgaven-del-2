@@ -42,7 +42,7 @@
     overflow: hidden;
 }
 
-/* Venstre seksjon (login/registrer) */
+/* Venstre seksjon */
 .venstre {
     flex: 1;
     padding: 40px;
@@ -82,7 +82,7 @@
 .logo-del p { font-size: 14px; opacity: 0.8; }
 .venstre-innhold h2 { font-size: 22px; }
 
-/* Høyre seksjon (login/registrer og welcome) */
+/* Høyre seksjon */
 .hoyre {
     flex: 1.2;
     padding: 40px;
@@ -92,19 +92,15 @@
     justify-content: center;
     position: relative;
     z-index: 2;
-    text-align: center;
 }
 
-h3 { 
-    margin-bottom: 25px; 
-    font-size: 24px; 
-}
+h3 { margin-bottom: 30px; font-size: 24px; }
 
 /* Input-felt */
 .felt {
     width: 100%;
     padding: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     background: #2a2e35;
     border: 1px solid #333;
     border-radius: 8px;
@@ -137,27 +133,28 @@ h3 {
 
 /* Checkbox */
 .valg {
-    margin: 15px 0;
+    margin: 25px 0;
 }
 
 .sjekk {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #ccc;
+    gap: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
     cursor: pointer;
 }
 
 .sjekk input {
-    display: none; /* Skjul vanlig checkbox */
+    display: none;
 }
 
 .boks {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #444;
-    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
     position: relative;
 }
 
@@ -169,9 +166,11 @@ h3 {
 .sjekk input:checked + .boks::after {
     content: "✓";
     position: absolute;
-    left: 4px;
-    top: -2px;
+    left: 5px;
+    top: 0;
+    font-size: 18px;
     color: white;
+    font-weight: bold;
 }
 
 /* Linje og copyright */
@@ -194,25 +193,71 @@ h3 {
     color: #444;
 }
 
-/* Welcome-side spesifikk */
-.welcome-card {
+/* Vilkår-boks */
+#vilkar-boks {
+    background: #2a2e35;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+#vilkar-boks h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.vilkar-tekst p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.vilkar-tekst ul {
+    list-style: disc;
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+#vilkar-boks .sjekk {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* ========================= */
+/* WELCOME SIDE (ny del) */
+/* ========================= */
+
+.welcome-card {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1.2;
+}
+
+.welcome-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* mellomrom mellom alle elementene */
+    text-align: center;
 }
 
 .welcome-content h1 {
-    font-size: 30px;
-    margin-bottom: 15px;
+    font-size: 28px;
 }
 
 .welcome-content p {
     font-size: 16px;
-    margin-bottom: 25px;
 }
 
 .logout-btn {
-    width: 150px;
-    margin: 0 auto;
+    width: 160px;
 }
