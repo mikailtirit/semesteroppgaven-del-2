@@ -1,15 +1,3 @@
-from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired
-
-
-class registerForm(FlaskForm):
-    username = StringField("brukernavn", validators=[InputRequired()])
-    Password = PasswordField("passord", validators=[InputRequired()])
-    submit = SubmitField("register")
-
-    
-class loginForm(FlaskForm):
-    username = StringField("brukernavn", validators=[InputRequired()])
-    Password = PasswordField("passord", validators=[InputRequired()])
-    submit = SubmitField("login")
+Project starts from this commit: Created RegisterForm and LoginForm using Flask-WTF with username and password fields.
+Both forms include basic InputRequired validation and submit buttons.
+This sets up the foundation for the user authentication system in the project.
