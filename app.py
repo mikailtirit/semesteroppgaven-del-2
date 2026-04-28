@@ -87,3 +87,11 @@ def logout():
     return redirect('/')
 
 
+@app.route('/dashboard')
+def dashboard():
+    if 'user' not in session:
+        return redirect('/login')
+    
+    return render_template('dashboard.html', user=session['user'])
+
+
