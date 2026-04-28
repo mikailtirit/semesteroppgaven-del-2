@@ -2,9 +2,12 @@ from flask import Flask, render_template, request, redirect, session
 from forms import RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
+from datetime import timedelta 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'devkey'
+
+app.config['PERMANENT_SESSION_LIFE'] = timedelta(hours=24)
 
 
 
