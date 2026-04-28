@@ -1,17 +1,27 @@
-
 <html>
 <head>
     <title>My App</title>
 </head>
 <body>
 
-<h1>Welcome to My Flask App</h1>
+{% if user %}
 
-<p>This is a simple app where you can register and login.</p>
+    <h1>Welcome {{ user }}</h1>
 
-<a href="/register">
-    <button>Get Started</button>
-</a>
+    <a href="/logout">
+        <button>Logout</button>
+    </a>
+
+{% else %}
+
+    <h1>Welcome to My App</h1>
+    <p>Please login or register to continue</p>
+
+    <a href="/login">
+        <button>Get Started</button>
+    </a>
+
+{% endif %}
 
 </body>
 </html>

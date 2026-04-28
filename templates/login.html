@@ -1,0 +1,37 @@
+<head>
+    <title>Login & Register</title>
+</head>
+<body>
+
+<h1>Login</h1>
+
+<form method="POST" action="/login">
+    {{ login_form.hidden_tag() }}
+
+    {{ login_form.username.label }}<br>
+    {{ login_form.username() }}<br><br>
+
+    {{ login_form.password.label }}<br>
+    {{ login_form.password() }}<br><br>
+
+    {{ login_form.submit() }}
+</form>
+
+<hr>
+
+<h1>Register</h1>
+
+<form method="POST" action="/register">
+    {{ register_form.hidden_tag() }}
+
+    {{ register_form.username.label }}<br>
+    {{ register_form.username() }}<br><br>
+
+    {{ register_form.password.label }}<br>
+    {{ register_form.password() }}<br><br>
+
+    {{ register_form.submit() }}
+</form>
+
+</body>
+</html>
