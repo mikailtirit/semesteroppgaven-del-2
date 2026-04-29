@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<img src="/static/bilder/blue_wallpaper.jpeg" class="bg-image">
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

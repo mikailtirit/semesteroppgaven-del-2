@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login & Register</title>
+{% extends "base.html" %}
 
-  
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% block title %}Login & Register{% endblock %}
+
+{% block content %}
 
 <h1>Login</h1>
 
 {% if error %}
-    <p class ="error">{{ error }}</p>
+    <p class="error">{{ error }}</p>
 {% endif %}
 
 <form method="POST" action="/login">
@@ -42,5 +38,4 @@
     {{ register_form.submit() }}
 </form>
 
-</body>
-</html>
+{% endblock %}
