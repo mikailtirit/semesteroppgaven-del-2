@@ -46,12 +46,13 @@ def login():
             session.permanent = True
             return redirect('/dashboard')
         else:
-            return "Invalid login"
+            error = "Invalid username or password"
 
     return render_template(
         'login.html',
         login_form=login_form,
-        register_form=register_form
+        register_form=register_form,
+        error=error
     )
 
 
