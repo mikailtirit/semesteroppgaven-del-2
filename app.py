@@ -10,16 +10,18 @@ app.config['SECRET_KEY'] = 'devkey'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=24)
 
 
-
 @app.route('/')
 def home():
-    return render_template('home.html', user=session.get('user'))
+    if 'user' in session:
+        return redirect('/dashboard')  
+    return render_template('home.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
     register_form = RegisterForm()
+    error = None
 
 
     if login_form.validate_on_submit():
@@ -41,6 +43,7 @@ def login():
 
         if user and check_password_hash(user['password'], password):
             session['user'] = user['username']
+            session.permanent = True
             return redirect('/dashboard')
         else:
             return "Invalid login"
