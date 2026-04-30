@@ -4,27 +4,57 @@
 
 {% block content %}
 
-<h1>Welcome {{ user }} 🎬</h1>
+<div class="dashboard-container">
 
-<form method="POST" action="/add_favorite">
-    <input type="hidden" name="movie_title" value="Batman">
-    <button type="submit">❤️ Add Batman</button>
-</form>
+    <div class="dashboard-top">
 
-<form method="POST" action="/add_favorite">
-    <input type="hidden" name="movie_title" value="Interstellar">
-    <button type="submit">❤️ Add Interstellar</button>
-</form>
+        <div>
+            <h1>Welcome {{ user }} 🎬</h1>
+            <p class="dashboard-subtitle">Search movies, explore trending titles, and save your favorites.</p>
+        </div>
 
-<form method="POST" action="/add_favorite">
-    <input type="hidden" name="movie_title" value="Joker">
-    <button type="submit">❤️ Add Joker</button>
-</form>
+        <div class="dashboard-actions">
+            <a href="/favorites">
+                <button>My Favorites</button>
+            </a>
 
-<br>
+            <a href="/logout">
+                <button>Logout</button>
+            </a>
+        </div>
 
-<a href="/logout">
-    <button>Logout</button>
-</a>
+    </div>
 
-{% endblock %}  
+
+    <form method="GET" action="/dashboard" class="search-form">
+        <input type="text" name="search" placeholder="Search movie...">
+        <button type="submit">Search</button>
+    </form>
+
+
+    <div class="movies-grid">
+
+        {% for movie in movies %}
+
+        <div class="movie-card">
+
+            <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}">
+
+            <div class="movie-info">
+                <h3>{{ movie.title }}</h3>
+
+                <form method="POST" action="/add_favorite">
+                    <input type="hidden" name="movie_title" value="{{ movie.title }}">
+                    <button type="submit"> Add Favorite</button>
+                </form>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

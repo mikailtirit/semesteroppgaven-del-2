@@ -3,10 +3,27 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Welcome to My App</h1>
-<p>Please login or register to continue</p>
 
-<a href="/login">
-    <button>Get Started</button>
-</a>
+<div class="home-container">
+
+    <h1>Chickfiley Films 🎬</h1>
+
+    <p class="home-text">
+        Discover trending movies, search for your favorites, and build your own personal watchlist.
+        CineVault lets you explore real movie data, save favorites, and create your own movie space.
+    </p>
+
+    <div class="home-features">
+        <p>Search movies instantly</p>
+        <p>Save favorites to your account</p>
+        <p>Explore trending titles</p>
+        <p>Build your own movie collection</p>
+    </div>
+
+    <a href="/login">
+        <button class="start-btn">Get Started</button>
+    </a>
+
+</div>
+
 {% endblock %}

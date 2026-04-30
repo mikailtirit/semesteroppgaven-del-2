@@ -4,38 +4,46 @@
 
 {% block content %}
 
-<h1>Login</h1>
+<div class="auth-box">
 
-{% if error %}
-<p class="error">{{ error }}</p>
-{% endif %}
+    <div class="register-side">
+        <h1>Register</h1>
+   
 
-<form method="POST" action="/login">
-    {{ login_form.hidden_tag() }}
+        <form method="POST" action="/register">
+            {{ register_form.hidden_tag() }}
 
-    {{ login_form.username.label }}<br>
-    {{ login_form.username() }}<br><br>
+            {{ register_form.username.label }}
+            {{ register_form.username() }}
 
-    {{ login_form.password.label }}<br>
-    {{ login_form.password() }}<br><br>
+            {{ register_form.password.label }}
+            {{ register_form.password() }}
 
-    {{ login_form.submit() }}
-</form>
+            {{ register_form.submit() }}
+        </form>
+    </div>
 
-<hr>
+    <div class="login-side">
+        <h1>Login</h1>
 
-<h1>Register</h1>
 
-<form method="POST" action="/register">
-    {{ register_form.hidden_tag() }}
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
 
-    {{ register_form.username.label }}<br>
-    {{ register_form.username() }}<br><br>
+        <form method="POST" action="/login">
+            {{ login_form.hidden_tag() }}
 
-    {{ register_form.password.label }}<br>
-    {{ register_form.password() }}<br><br>
+            {{ login_form.username.label }}
+            {{ login_form.username() }}
 
-    {{ register_form.submit() }}
-</form>
+            {{ login_form.password.label }}
+            {{ login_form.password() }}
+
+            {{ login_form.submit() }}
+        </form>
+    </div>
+
+</div>
 
 {% endblock %}

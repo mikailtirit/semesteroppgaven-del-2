@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 from forms import RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
+import requests
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -97,8 +98,23 @@ def dashboard():
     if 'user' not in session:
         return redirect('/login')
 
-    return render_template('dashboard.html', user=session['user'])
+    search = request.args.get('search')
 
+    if search:
+        url = f"https://api.themoviedb.org/3/search/movie?api_key=012bab2f58baf6f690135807994e8f9b&language=en-US&query={search}"
+    else:
+        url = "https://api.themoviedb.org/3/movie/popular?api_key=012bab2f58baf6f690135807994e8f9b&language=en-US&page=1"
+
+    response = requests.get(url)
+    data = response.json()
+
+    movies = data['results']
+
+    return render_template(
+        'dashboard.html',
+        user=session['user'],
+        movies=movies
+    )
 
 
 @app.route('/add_favorite', methods=['POST'])
@@ -127,6 +143,28 @@ def add_favorite():
     return redirect('/dashboard')
 
 
+@app.route('/favorites')
+def favorites():
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="mikail2008",
+        password="123Akademiet!",
+        database="semesteroppgave_db"
+    )
+
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(
+        "SELECT movie_title FROM favorites WHERE user_id = %s",
+        (session['user_id'],)
+    )
+
+    movies = cursor.fetchall()
+
+    return render_template('favorites.html', movies=movies)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
