@@ -14,13 +14,19 @@
         </div>
 
         <div class="dashboard-actions">
+
             <a href="/favorites">
                 <button>My Favorites</button>
+            </a>
+
+            <a href="/recommended">
+                <button>Recommended</button>
             </a>
 
             <a href="/logout">
                 <button>Logout</button>
             </a>
+
         </div>
 
     </div>
@@ -45,7 +51,7 @@
 
                 <form method="POST" action="/add_favorite">
                     <input type="hidden" name="movie_title" value="{{ movie.title }}">
-                    <button type="submit"> Add Favorite</button>
+                    <button type="submit">Add Favorite</button>
                 </form>
             </div>
 

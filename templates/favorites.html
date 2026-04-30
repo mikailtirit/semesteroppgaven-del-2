@@ -9,9 +9,19 @@
     <h1>My Favorite Movies 🎬</h1>
 
     {% for movie in movies %}
+
         <div class="favorite-card">
+
             <p>{{ movie.movie_title }}</p>
+
+            <form method="POST" action="/delete_favorite/{{ movie.id }}">
+                <button type="submit" class="delete-btn">
+                    <img src="{{ url_for('static', filename='bilder/deletebilde.png') }}" alt="Delete">
+                </button>
+            </form>
+
         </div>
+
     {% endfor %}
 
     <a href="/dashboard">

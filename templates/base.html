@@ -2,11 +2,17 @@
 <html>
 <head>
     <title>{% block title %}My App{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.3">
 </head>
 <body>
 
 <img src="{{ url_for('static', filename='bilder/blue_wallpaper.jpeg') }}" class="bg-image">
+
+{% if request.path != '/dashboard' and request.path != '/recommended' %}
+<div class="side-logo">
+    <img src="{{ url_for('static', filename='bilder/hovedlogo.png') }}" alt="Logo">
+</div>
+{% endif %}
 
 {% block content %}
 {% endblock %}
