@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Recommended{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-top">
+
+        <div>
+            <h1>Recommended For You 🎬</h1>
+            <p class="dashboard-subtitle">
+                Movies based on your favorites.
+            </p>
+        </div>
+
+        <div class="dashboard-actions">
+
+            <a href="/favorites">
+                <button>My Favorites</button>
+            </a>
+
+            <a href="/dashboard">
+                <button>Dashboard</button>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="movies-grid">
+
+        {% for movie in movies %}
+
+        <div class="movie-card">
+
+            <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}">
+
+            <div class="movie-info">
+                <h3>{{ movie.title }}</h3>
+
+                <form method="POST" action="/add_favorite">
+                    <input type="hidden" name="movie_title" value="{{ movie.title }}">
+                    <button type="submit">Add Favorite</button>
+                </form>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
