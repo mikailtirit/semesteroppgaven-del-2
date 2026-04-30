@@ -12,6 +12,7 @@ The purpose of this file is to be transparent and honest about the development p
 
 Several AI tools were used during different parts of the project:
 
+
 - **ChatGPT** – coding help, debugging, structure, explanations, feature building, UI/UX improvements  
 - **Claude** – coding support, writing assistance, idea generation, alternative solutions  
 - **Gemini** – research help, brainstorming, technical explanations, feature suggestions  

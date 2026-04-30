@@ -20,6 +20,7 @@ The goal was to create a realistic and visually modern movie platform inspired b
 
 #  Main Features
 
+
 ##  Authentication System
 
 A complete user authentication system was built from scratch using Flask and MySQL.

@@ -11,4 +11,5 @@ os.chdir('/var/www/test')
 os.environ['VIRTUAL_ENV'] = '/var/www/test/env'
 os.environ['PATH'] = '/var/www/test/env/bin:' + os.environ['PATH']
 
+
 from app import app as application

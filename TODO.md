@@ -21,6 +21,7 @@ It shows how the project was developed step by step through structured goals, im
 
 ---
 
+
 # Phase 2 – Authentication System 
 
 - [x] Create register page
