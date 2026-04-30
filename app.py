@@ -2,18 +2,17 @@ from flask import Flask, render_template, request, redirect, session
 from forms import RegisterForm, LoginForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
-from datetime import timedelta 
+from datetime import timedelta
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'devkey'
-
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=24)
 
 
 @app.route('/')
 def home():
     if 'user' in session:
-        return redirect('/dashboard')  
+        return redirect('/dashboard')
     return render_template('home.html')
 
 
@@ -22,7 +21,6 @@ def login():
     login_form = LoginForm()
     register_form = RegisterForm()
     error = None
-
 
     if login_form.validate_on_submit():
         username = login_form.username.data
@@ -43,6 +41,7 @@ def login():
 
         if user and check_password_hash(user['password'], password):
             session['user'] = user['username']
+            session['user_id'] = user['id']
             session.permanent = True
             return redirect('/dashboard')
         else:
@@ -54,7 +53,6 @@ def login():
         register_form=register_form,
         error=error
     )
-
 
 
 @app.route('/register', methods=['POST'])
@@ -87,10 +85,10 @@ def register():
     return redirect('/login')
 
 
-
 @app.route('/logout')
 def logout():
     session.pop('user', None)
+    session.pop('user_id', None)
     return redirect('/')
 
 
@@ -98,7 +96,9 @@ def logout():
 def dashboard():
     if 'user' not in session:
         return redirect('/login')
-    
+
     return render_template('dashboard.html', user=session['user'])
 
 
+if __name__ == '__main__':
+    app.run(debug=True)
