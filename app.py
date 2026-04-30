@@ -100,5 +100,33 @@ def dashboard():
     return render_template('dashboard.html', user=session['user'])
 
 
+
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    movie_title = request.form['movie_title']
+    user_id = session['user_id']
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="mikail2008",
+        password="123Akademiet!",
+        database="semesteroppgave_db"
+    )
+
+    cursor = db.cursor()
+
+    sql = "INSERT INTO favorites (user_id, movie_title) VALUES (%s, %s)"
+    values = (user_id, movie_title)
+
+    cursor.execute(sql, values)
+    db.commit()
+
+    return redirect('/dashboard')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+

@@ -4,12 +4,27 @@
 
 {% block content %}
 
-<h1>Dashboard</h1>
+<h1>Welcome {{ user }} 🎬</h1>
 
-<p>Welcome {{ user }} 👋</p>
+<form method="POST" action="/add_favorite">
+    <input type="hidden" name="movie_title" value="Batman">
+    <button type="submit">❤️ Add Batman</button>
+</form>
+
+<form method="POST" action="/add_favorite">
+    <input type="hidden" name="movie_title" value="Interstellar">
+    <button type="submit">❤️ Add Interstellar</button>
+</form>
+
+<form method="POST" action="/add_favorite">
+    <input type="hidden" name="movie_title" value="Joker">
+    <button type="submit">❤️ Add Joker</button>
+</form>
+
+<br>
 
 <a href="/logout">
     <button>Logout</button>
 </a>
 
-{% endblock %}
+{% endblock %}  
