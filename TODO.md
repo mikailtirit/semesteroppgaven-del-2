@@ -1,146 +1,101 @@
-# TODO.md
+# Eksamen – To-do liste
 
-## Development Plan – ChickFiley Movies
+## Oppsett
 
-This file documents the planning and progress of the ChickFiley Movies project.  
-It shows how the project was developed step by step through structured goals, improvements, and completed milestones.
-
----
-
-# Phase 1 – Project Setup 
-
-- [x] Create project idea and concept
-- [x] Choose movie platform theme
-- [x] Set up Flask project structure
-- [x] Create templates folder
-- [x] Create static folder
-- [x] Create `app.py`
-- [x] Create `forms.py`
-- [x] Connect CSS file
-- [x] Test first local version
+- [x] Lage ny branch som heter `eksamen`
+- [x] Jobbe kun på eksamen-branchen frem til innlevering
+- [ ] Teste at alt fungerer før jeg pusher til GitHub
 
 ---
 
+## Favoritter
 
-# Phase 2 – Authentication System 
-
-- [x] Create register page
-- [x] Create login page
-- [x] Add Flask-WTF forms
-- [x] Connect forms to backend
-- [x] Add MySQL users table
-- [x] Store users in database
-- [x] Add password hashing
-- [x] Create session login system
-- [x] Protect private routes
-- [x] Add logout functionality
+- [x] Lage en egen favoritt-side
+- [x] Koble favoritt-siden til databasen
+- [x] Bruke `session['user_id']` for å hente riktige favoritter
+- [x] Lage SQL-spørring som henter favorittfilmer for innlogget bruker
+- [x] Bruke `dictionary=True`
+- [x] Bruke `fetchall()`
+- [x] Sende filmene til HTML med Jinja2
+- [x] Vise favorittfilmene på nettsiden
 
 ---
 
-# Phase 3 – Dashboard & Movie API 
+## Innlogging og sikkerhet
 
-- [x] Create dashboard page
-- [x] Connect TMDB API
-- [x] Show trending / popular movies
-- [x] Show movie posters
-- [x] Display movie titles
-- [x] Build responsive movie grid
-- [x] Improve dashboard layout
-- [x] Add navigation buttons
-
----
-
-# Phase 4 – Search System 
-
-- [x] Add search input field
-- [x] Connect search to TMDB API
-- [x] Display search results dynamically
-- [x] Improve search styling
-- [x] Test multiple search queries
+- [x] Hash passord med Werkzeug
+- [x] Forklare forskjellen på passord og hash
+- [x] Legge til tidsbegrensning på innlogging
+- [x] Teste at brukeren blir logget ut etter en viss tid
+- [x] Kun la innloggede brukere få tilgang til beskyttede sider
+- [ ] Kun la brukere se sine egne favoritter
+- [x] Kunne forklare hvordan `%s` beskytter mot SQL Injection
 
 ---
 
-# Phase 5 – Favorites System 
 
-- [x] Create favorites table in MySQL
-- [x] Add "Add Favorite" button
-- [x] Save favorites to database
-- [x] Create favorites page
-- [x] Show saved favorites per user
-- [x] Improve favorites page layout
-- [x] Add delete functionality
-- [x] Delete favorites from database
-- [x] Add hover animations
+## Ting jeg må kunne forklare uten hjelp
 
----
+### Flask
 
-# Phase 6 – Recommendations System 
+- [ ] `@app.route()`
+- [ ] `render_template()`
+- [ ] `redirect()`
+- [ ] `request.form`
 
-- [x] Plan personalized recommendations
-- [x] Read user favorites from database
-- [x] Search TMDB using favorite movie
-- [x] Fetch similar movies
-- [x] Create recommended page
-- [x] Add Recommended button
-- [x] Test recommendation logic
+### Session
 
----
+- [ ] Hva en session er
+- [ ] Hvorfor vi bruker `session['user_id']`
+- [ ] Hvordan session holder brukeren innlogget
 
-# Phase 7 – UI / UX Improvements 
+### Database
 
-- [x] Improve homepage design
-- [x] Improve login/register styling
-- [x] Improve dashboard design
-- [x] Improve favorites page styling
-- [x] Add hover effects
-- [x] Add glassmorphism layout
-- [x] Improve spacing and alignment
-- [x] Improve button design
-- [x] Make website feel modern
+- [ ] `connect_db()`
+- [ ] `cursor`
+- [ ] `cursor.execute()`
+- [ ] `%s`
+- [ ] SQL Injection
+- [ ] `fetchone()`
+- [ ] `fetchall()`
+- [ ] `dictionary=True`
+- [ ] `db.commit()`
+
+### Jinja2
+
+- [ ] Hvordan sende data fra Flask til HTML
+- [ ] Hva `movies=movies` betyr
+- [ ] Hvordan vise data fra databasen i HTML
+- [ ] Hvordan bruke løkker i HTML
 
 ---
 
-# Phase 8 – Branding & Identity 
+## Ting jeg må kunne forklare til sensor
 
-- [x] Add custom logo
-- [x] Add animated spinning logo
-- [x] Add 3D visual effect
-- [x] Position logo correctly
-- [x] Improve overall branding
-
----
-
-# Phase 9 – Documentation 
-
-- [x] Create README.md
-- [x] Create AI.md
-- [x] Create Reflection.md
-- [x] Create RiskAssessment.md
-- [x] Create TODO.md
+- [ ] Hvordan favorittsystemet fungerer
+- [ ] Hvordan session fungerer
+- [ ] Hvordan data flyter fra database til HTML
+- [ ] Hvordan jeg beskytter webapplikasjonen
+- [ ] Hvorfor jeg bruker hashing
+- [ ] Hvordan `%s` beskytter mot SQL Injection
+- [ ] Hva GDPR er
+- [ ] Hva cookies er
+- [ ] Hva WCAG er
+- [ ] Hva UU-tilsynet gjør
+- [ ] Forskjellen på `fetchone()` og `fetchall()`
+- [ ] Hvorfor jeg bruker `dictionary=True`
 
 ---
 
-# Future Goals 
+## Før eksamen
 
-- [ ] Movie details page
-- [ ] Watchlist system
-- [ ] Ratings & reviews
-- [ ] Better recommendation logic
-- [ ] Mobile-first optimization
-- [ ] Pagination
-- [ ] User profile page
-- [ ] Admin dashboard
-- [ ] Dark / light mode
-- [ ] Deployment online
-
----
-
-# Final Status
-
-## Current Progress: **Majority Completed **
-
-The project has successfully grown from a simple idea into a complete full-stack movie web application with authentication, API integration, database systems, modern design, and personalized features.
-
----
-
-Created by **Mikail Tirit**
+- [ ] Teste registrering
+- [ ] Teste innlogging
+- [ ] Teste favoritter
+- [ ] Teste databasekobling
+- [ ] Teste session
+- [ ] Teste personvernside
+- [ ] Teste tastaturnavigasjon
+- [ ] Rydde opp i kode
+- [ ] Legge til kommentarer der det er nødvendig
+- [ ] Push siste versjon til GitHub

@@ -14,14 +14,20 @@ import mysql.connector
 # Importerer requests slik at vi kan hente filmdata fra TMDB API
 import requests
 
+# Brukes for å bestemme hvor lenge en bruker skal være innlogget
+from datetime import timedelta
+
 
 
 
 # Oppretter Flask-applikasjonen
 app = Flask(__name__)
 
-# Hemmelig nøkkel som Flask bruker til sessions
+
+#Flask lager en signert cookie
+#Den inneholder session-data
 app.config['SECRET_KEY'] = 'devkey'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 
 
 
@@ -97,7 +103,7 @@ def login():
             login_form.password.data
         ):
 
-            # Lagrer brukerinformasjon i session
+            #flask lagrer dette i en cookie 
             session['user'] = user['username']
             session['user_id'] = user['id']
 
@@ -205,7 +211,60 @@ def dashboard():
     )
 
 
+# --------------------------------------------------
+# LEGG TIL FAVORITT
+# --------------------------------------------------
 
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+
+    #hvis session ikke har user_id send tilbake
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    db = connect_db()
+    cursor = db.cursor()
+
+    # Lagrer filmen som favoritt i db 
+    # og kobler den til riktig bruker
+    cursor.execute(
+        "INSERT INTO favorites (user_id, movie_title) VALUES (%s, %s)",
+        (
+            session['user_id'],
+            request.form['movie_title']
+        )
+    )
+
+    db.commit()
+
+    return redirect('/dashboard')
+
+
+# --------------------------------------------------
+# VIS FAVORITTER
+# --------------------------------------------------
+
+@app.route('/favorites')
+def favorites():
+
+    if 'user_id' not in session:
+        return redirect('/login')
+
+    db = connect_db()
+    cursor = db.cursor(dictionary=True)
+
+    # Henter alle favorittfilmer til den innloggede brukeren
+    cursor.execute(
+        "SELECT id, movie_title FROM favorites WHERE user_id = %s",
+        (session['user_id'],)
+    )
+
+    movies = cursor.fetchall()
+
+    return render_template(
+        'favorites.html',
+        movies=movies
+    )
 
 
 if __name__ == '__main__':
